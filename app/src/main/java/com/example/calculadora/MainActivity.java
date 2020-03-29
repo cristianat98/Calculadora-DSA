@@ -14,11 +14,12 @@ import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Double> numeros = new ArrayList<Double>();
-    double resultado;
+    //List<Double> numeros = new ArrayList<Double>();
+    double num1, num2;
     String pantalla = "";
     TextView op, res;
-    Button bt1;
+    int i = 0;
+    int operacion = 0;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -82,23 +83,75 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btsuma (View v){
+        String numero = pantalla.substring(i, pantalla.length());
+        if (i == 0)
+            num1 = Double.parseDouble(numero);
+
+        else{
+            num2 = Double.parseDouble(numero);
+            num1= num1+num2;
+        }
+
         pantalla = pantalla + "+";
         op.setText(pantalla);
+        i = pantalla.length();
+        String pan = num1 +"";
+        res.setText(pan);
+        operacion = 1;
     }
 
-    public void btresta (View v){
+    public void btresta (View v) {
+        String numero = pantalla.substring(i, pantalla.length());
+        if (i == 0)
+            num1 = Double.parseDouble(numero);
+
+        else {
+            num2 = Double.parseDouble(numero);
+            num1 = num1 - num2;
+        }
+
         pantalla = pantalla + "-";
         op.setText(pantalla);
+        i = pantalla.length();
+        String pan = num1 + "";
+        res.setText(pan);
+        operacion = 2;
     }
 
     public void btmul (View v){
+        String numero = pantalla.substring(i, pantalla.length());
+        if (i == 0)
+            num1 = Double.parseDouble(numero);
+
+        else{
+            num2 = Double.parseDouble(numero);
+            num1= num1*num2;
+        }
+
         pantalla = pantalla + "*";
         op.setText(pantalla);
+        i = pantalla.length();
+        String pan = num1 +"";
+        res.setText(pan);
+        operacion = 3;
     }
 
     public void btdiv (View v){
+        String numero = pantalla.substring(i, pantalla.length());
+        if (i == 0)
+            num1 = Double.parseDouble(numero);
+
+        else{
+            num2 = Double.parseDouble(numero);
+            num1= num1/num2;
+        }
+
         pantalla = pantalla + "/";
         op.setText(pantalla);
+        i = pantalla.length();
+        String pan = num1 +"";
+        res.setText(pan);
+        operacion = 4;
     }
 
     public void btpar1 (View v){
@@ -134,16 +187,33 @@ public class MainActivity extends AppCompatActivity {
     public void btc (View v){
         pantalla = "";
         op.setText(pantalla);
+        i = 0;
     }
 
     public void btd (View v){
-        String ultimo = pantalla.substring(pantalla.length()-1);
-        pantalla = pantalla.replace(ultimo,"");
+        pantalla = pantalla.substring(0, pantalla.length()-1);
         op.setText(pantalla);
+        res.setText("");
     }
 
     public void btigual (View v){
+        String numero = pantalla.substring(i, pantalla.length());
+        num2 = Double.parseDouble(numero);
+        if (operacion ==1)
+            num1= num1+num2;
+        else if (operacion ==2)
+            num1 = num1-num2;
+        else if (operacion ==3)
+            num1= num1+num2;
+        else if (operacion==4)
+            num1= num1/num2;
+
+        operacion = 0;
         pantalla = pantalla + "=";
         op.setText(pantalla);
+        i = pantalla.length();
+        String pan = num1 +"";
+        res.setText(pan);
+        operacion = 0;
     }
 }
